@@ -22,6 +22,6 @@ RUN sqlite3 /nginx_db/logs.db "create table todo (ip TEXT, timestamp TEXT, statu
 
 USER $APP_USER
 
-CMD ["./start-logging.sh"]
+#CMD ["./start-logging.sh"]
 
 
