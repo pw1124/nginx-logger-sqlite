@@ -6,13 +6,13 @@ ENV TZ=America/Vancouver \
 RUN groupadd $APP_USER \
     && useradd -g $APP_USER $APP_USER \
     && mkdir /nginx_logger_script
+    && mkdir /nginx_db
 
 WORKDIR /nginx_logger_script
 
 USER $APP_USER
 
 COPY ./start-logging.sh ./
-RUN mkdir /nginx_db
 
 RUN chown -R $APP_USER:$APP_USER /nginx_logger_script
 RUN chown -R $APP_USER:$APP_USER /nginx_db
