@@ -1,0 +1,33 @@
+
+name: Build Image and Push
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/**'
+      - 'Dockerfile'
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    environment: default
+    steps:
+      # Checkout with history (to get git describe output properly)
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      # Run script, updates the GIT-VERSION-FILE with version number
+      - name: Update GIT-VERSION-FILE
+        run: bash git-version.sh
+      - name: Get version tag from GIT-VERSION-FILE
+        run: echo "gitver=$(cat GIT-VERSION-FILE)" >> $GITHUB_ENV
+      - name: Login to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Build image w/version
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/chord-be-rust:${{ env.gitver }}
+      - name: Push image w/version
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/chord-be-rust:${{ env.gitver }}
+
