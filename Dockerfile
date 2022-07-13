@@ -11,7 +11,7 @@ WORKDIR /nginx_logger_script
 
 COPY ./start-logging.sh ./
 
-RUN chown $APP_USER:$APP_USER /nginx_logger_script
+RUN chown -R $APP_USER:$APP_USER /nginx_logger_script
 
 RUN apt update 
 RUN apt install sqlite3 -y
@@ -22,6 +22,6 @@ RUN sqlite3 /nginx_db/logs.db "create table todo (ip TEXT, timestamp TEXT, statu
 
 USER $APP_USER
 
-#CMD ["./start-logging.sh"]
+CMD ["./start-logging.sh"]
 
 
