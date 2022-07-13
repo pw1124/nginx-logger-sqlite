@@ -5,7 +5,7 @@ ENV TZ=America/Vancouver \
 
 RUN groupadd $APP_USER \
     && useradd -g $APP_USER $APP_USER \
-    && mkdir /nginx_logger_script
+    && mkdir /nginx_logger_script \
     && mkdir /nginx_db
 
 WORKDIR /nginx_logger_script
