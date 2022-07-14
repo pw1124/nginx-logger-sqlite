@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 ENV TZ=America/Vancouver \
-    APP_USER=100
+    APP_USER=nobody
 
 RUN useradd -g users $APP_USER \
     && mkdir /nginx_db 
