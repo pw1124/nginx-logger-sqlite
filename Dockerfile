@@ -10,7 +10,7 @@ WORKDIR /nginx_logger_script
 
 COPY ./start-logging.sh ./
 
-RUN chown -R  /nginx_logger_script
+RUN chown -R users:$APP_USER /nginx_logger_script
 RUN chown -R users:$APP_USER /nginx_db
 
 RUN apt update 
