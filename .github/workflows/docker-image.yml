@@ -29,6 +29,10 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build image w/version
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/nginx-logger-sqlite:${{ env.gitver }}
+      - name: Build latest image 
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/nginx-logger-sqlite:latest
       - name: Push image w/version
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-logger-sqlite:${{ env.gitver }}
+      - name: Push latest image 
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx-logger-sqlite:latest
 
