@@ -1,18 +1,17 @@
 FROM ubuntu:latest
 
 ENV TZ=America/Vancouver \
-    APP_USER=appuser
+    APP_USER=100
 
-RUN groupadd $APP_USER \
-    && useradd -g $APP_USER $APP_USER \
+RUN useradd -g users $APP_USER \
     && mkdir /nginx_db 
 
 WORKDIR /nginx_logger_script
 
 COPY ./start-logging.sh ./
 
-RUN chown -R $APP_USER:$APP_USER /nginx_logger_script
-RUN chown -R $APP_USER:$APP_USER /nginx_db
+RUN chown -R  /nginx_logger_script
+RUN chown -R users:$APP_USER /nginx_db
 
 RUN apt update 
 RUN apt install sqlite3 -y
