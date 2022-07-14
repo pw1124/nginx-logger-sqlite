@@ -10,8 +10,8 @@ WORKDIR /nginx_logger_script
 
 COPY ./start-logging.sh ./
 
-RUN chown -R users:$APP_USER /nginx_logger_script
-RUN chown -R users:$APP_USER /nginx_db
+RUN chown -R $APP_USER:users /nginx_logger_script
+RUN chown -R $APP_USER:users /nginx_db
 
 RUN apt update 
 RUN apt install sqlite3 -y
