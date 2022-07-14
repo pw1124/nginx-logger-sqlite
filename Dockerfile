@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
 ENV TZ=America/Vancouver \
-    APP_USER=nobody
+    APP_USER=appuser
 
-#RUN useradd -g users $APP_USER \
+RUN useradd -g users -u 1000 $APP_USER \
 RUN mkdir /nginx_db 
 
 WORKDIR /nginx_logger_script
