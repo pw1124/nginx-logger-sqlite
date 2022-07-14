@@ -3,8 +3,8 @@ FROM ubuntu:latest
 ENV TZ=America/Vancouver \
     APP_USER=nobody
 
-RUN useradd -g users $APP_USER \
-    && mkdir /nginx_db 
+#RUN useradd -g users $APP_USER \
+RUN mkdir /nginx_db 
 
 WORKDIR /nginx_logger_script
 
